@@ -1,11 +1,12 @@
-
-img = ""; 
+img = "";
 status = "";
 objects = [];
+audio="";
 
-function preload(){
-    audio=loadSound("alarm.mp3");
+function preload() {
+    audio = loadSound("alarm.mp3");
 }
+
 
 function setup() {
     canvas = createCanvas(380, 380);
@@ -17,12 +18,12 @@ function setup() {
     document.getElementById("status").innerHTML = "Status : Detecting Objects";
 }
 
-function modelLoaded(){
+function modelLoaded() {
     console.log("Model Loaded!");
     status = true;
 }
 
-function gotResult(error, results){
+function gotResult(error, results) {
     if (error) {
         console.log(error);
     }
@@ -30,7 +31,7 @@ function gotResult(error, results){
     objects = results;
 }
 
-function draw(){
+function draw() {
     image(video, 0, 0, 380, 380);
     if (status != "person") {
         r = random(255);
@@ -51,9 +52,17 @@ function draw(){
         }
     }
 
-    else{
+    else {
         document.getElementById("status").innerHTML = "Status : Object Detected";
         document.getElementById("number_of_objects").innerHTML = "Person Not Found" + objects.length;
         audio.play();
     }
+}
+
+
+
+function play(){
+    song.play();
+    song.setVolume(1);
+    song.rate(1);
 }
